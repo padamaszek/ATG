@@ -12,14 +12,30 @@ namespace ATG
 
 		public void init()
 		{
-			List<int> ed = new List<int>() { 0, 1, 0, 1 };
-			List<int> ed2 = new List<int>() { 0, 0, 1, 0 };
-			List<int> ed3 = new List<int>() { 1, 0, 0, 0 };
-			List<int> ed4 = new List<int>() { 0, 1, 0, 0 };
-			graph.Add(1, ed);
-			graph.Add(2, ed2);
-			graph.Add(3, ed3);
-			graph.Add(4, ed4);
+			List<int> ed = new List<int>() {0, 1, 0, 1};
+			List<int> ed2 = new List<int>() {0, 0, 1, 0};
+			List<int> ed3 = new List<int>() {1, 0, 0, 0};
+			List<int> ed4 = new List<int>() {0, 1, 0, 0};
+			graph.Add(0, ed);
+			graph.Add(1, ed2);
+			graph.Add(2, ed3);
+			graph.Add(3, ed4);
+		}
+
+		public void addZeroes()
+		{
+			foreach (List<int> value in graph.Values)
+			{
+				value.Add(0);
+			}
+		}
+
+		public void addNeighbours(int index,List<int> neighbours)
+		{
+			for (int i = 0; i < neighbours.Count; i++)
+			{
+				addEdge(index,neighbours[i]);
+			}
 		}
 
 		public void addNode(int index, List<int> neighbours)
@@ -28,7 +44,10 @@ namespace ATG
 			{
 				graph.Remove(index);
 			}
+			//TODO: TO JEST COS NIE TAK Z NEIGH
 			graph.Add(index, neighbours);
+			addZeroes();
+			addNeighbours(index,neighbours);
 		}
 
 		public void removeNode(int index)
@@ -39,44 +58,14 @@ namespace ATG
 				graph[graphKey].RemoveAt(index - 1);
 			}
 		}
-		//TODO: HOW??
-		public void addEdgev2(int index, int edge)
-		{
-			List<int> keys = new List<int>();
-			foreach (int key in graph.Keys)
-			{
-				keys.Add(key);
-			}
-			graph[index][] = 1;
-			graph[][index] = 1;
-		}
 
-
-		public void addEdge(int index, int edge)
+		public void addEdge(int fromNode, int toNode)
 		{
-			if (!graph.ContainsKey(edge))
-			{
-				Console.WriteLine("NIE MA TAKIEGO WEZLA!");
-			}
-			else
-			{
-				List<int> edges = graph[index];
-				if (edges.Count < edge)
-				{
-					int[] tab = new int[edge];
-					for (int i = 0; i < graph[index].Count; i++)
-					{
-						tab[i] = graph[index][i];
-					}
-					tab[edge - 1] = 1;
-					graph[index] = tab.ToList();
-				}
-				else
-				{
-					graph[index][edge - 1] = 1;
-					graph[edge][index - 1] = 1;
-				}
-			}
+			List<int> keyList = new List<int>(graph.Keys);
+			int indexFrom = keyList.IndexOf(fromNode);
+			int indexTo = keyList.IndexOf(toNode);
+			graph[fromNode][indexTo] = 1;
+			graph[toNode][indexFrom] = 1;
 		}
 
 		public void removeEdge(int index, int edge)
@@ -128,7 +117,7 @@ namespace ATG
 			int even = 0, odd = 0;
 			foreach (int key in graph.Keys)
 			{
-				if (edgeDegree(key) % 2 == 0)
+				if (edgeDegree(key)%2 == 0)
 				{
 					even += 1;
 				}
