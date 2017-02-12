@@ -43,9 +43,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Euler.cs" />
+    <Compile Include="ExecuteEulerCircuit.cs" />
+    <Compile Include="FordFulkersonAlg.cs" />
+    <Compile Include="Jordan.cs" />
+    <Compile Include="Ruski.cs" />
+    <Compile Include="StronglyConnectedComponents.cs" />
+    <Compile Include="Djikstra.cs" />
     <Compile Include="Ex1.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Test.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

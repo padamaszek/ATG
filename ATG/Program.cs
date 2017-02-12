@@ -1,8 +1,10 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Euler_Circuit_Application;
 
 namespace ATG
 {
@@ -10,10 +12,19 @@ namespace ATG
 	{
 		static void Main(string[] args)
 		{
-			Ex1 ex1 = new Ex1();
-			ex1.init();
-			ex1.addNode(6,new List<int>() {0,1,3});
-			ex1.printGraph();
+			//Djikstra
+			//Start start = new Start();
+			//start.init();
+			StronglyConnectedComponents scc = new StronglyConnectedComponents();
+			//scc.init();
+			Jordan jordan = new Jordan();
+			//jordan.init();
+			ExecuteEulerCircuit ex = new ExecuteEulerCircuit();
+			//ex.Init();
+			FordFulkersonAlg ff = new FordFulkersonAlg();
+			//ff.GetInput();
+			Euler euler = new Euler();
+			euler.Init();
 			Console.ReadLine();
 		}
 	}

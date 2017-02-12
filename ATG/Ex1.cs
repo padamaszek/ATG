@@ -12,17 +12,19 @@ namespace ATG
 
 		public void init()
 		{
-			List<int> ed = new List<int>() {0, 1, 0, 1};
-			List<int> ed2 = new List<int>() {0, 0, 1, 0};
-			List<int> ed3 = new List<int>() {1, 0, 0, 0};
-			List<int> ed4 = new List<int>() {0, 1, 0, 0};
+			List<int> ed = new List<int>()  {0, 1, 0, 1, 0};
+			List<int> ed2 = new List<int>() {1, 0, 1, 0, 1};
+			List<int> ed3 = new List<int>() {0, 1, 0, 1, 0};
+			List<int> ed4 = new List<int>() {1, 0, 1, 0, 1};
+			List<int> ed5 = new List<int>() {0, 1, 0, 1, 0};
 			graph.Add(0, ed);
 			graph.Add(1, ed2);
 			graph.Add(2, ed3);
 			graph.Add(3, ed4);
+			graph.Add(4, ed5);
 		}
 
-		public void addZeroes()
+		private void addZeroes()
 		{
 			foreach (List<int> value in graph.Values)
 			{
@@ -30,11 +32,11 @@ namespace ATG
 			}
 		}
 
-		public void addNeighbours(int index,List<int> neighbours)
+		private void addNeighbours(int index, List<int> neighbours)
 		{
 			for (int i = 0; i < neighbours.Count; i++)
 			{
-				addEdge(index,neighbours[i]);
+				addEdge(index, neighbours[i]);
 			}
 		}
 
@@ -47,7 +49,8 @@ namespace ATG
 			//TODO: TO JEST COS NIE TAK Z NEIGH
 			graph.Add(index, neighbours);
 			addZeroes();
-			addNeighbours(index,neighbours);
+			
+			//addNeighbours(index, neighbours);
 		}
 
 		public void removeNode(int index)
@@ -55,10 +58,10 @@ namespace ATG
 			graph.Remove(index);
 			foreach (var graphKey in graph.Keys)
 			{
-				graph[graphKey].RemoveAt(index - 1);
+				graph[graphKey].RemoveAt(index );
 			}
 		}
-
+		//DOBRZE
 		public void addEdge(int fromNode, int toNode)
 		{
 			List<int> keyList = new List<int>(graph.Keys);
@@ -76,11 +79,11 @@ namespace ATG
 			}
 			else
 			{
-				graph[index][edge - 1] = 0;
+				graph[index][edge] = 0;
 			}
 		}
 
-		public int edgeDegree(int index)
+		private int edgeDegree(int index)
 		{
 			int degree = 0;
 			for (int i = 0; i < graph[index].Count; i++)
@@ -117,7 +120,7 @@ namespace ATG
 			int even = 0, odd = 0;
 			foreach (int key in graph.Keys)
 			{
-				if (edgeDegree(key)%2 == 0)
+				if (edgeDegree(key) % 2 == 0)
 				{
 					even += 1;
 				}
@@ -143,6 +146,7 @@ namespace ATG
 			{
 				Console.Write(degree + " ");
 			}
+			Console.WriteLine();
 		}
 
 		public void printGraph()

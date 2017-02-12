@@ -1,0 +1,189 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Collections;
+
+namespace Euler_Circuit_Application
+{
+	class EulerCircuit
+	{
+		Stack tempPath = new Stack();
+		ArrayList finalPath = new ArrayList(); //to store the final path
+		char[] nodeList; //to store the nodes
+		char[,] GraphMatrix; //to store the edge representation of Graph
+		int total, count; //total->total no of nodes, count->no of even degree node
+
+		private void Input()
+		{
+			const int all =
+			6;
+			total = all;
+			GraphMatrix = new char[all,all]
+			{
+				{'','','','','','' },
+				{'','','','','','' },
+				{'','','','','','' },
+				{'','','','','','' },
+				{'','','','','','' },
+				{'','','','','','' },
+
+			};
+			nodeList = new char[total];
+			nodeList[0] ='0';
+			nodeList[1] = '1';
+			nodeList[2] = '2';
+			nodeList[3] = '3';
+			nodeList[4] = '4';
+			nodeList[5] = '5';
+			;
+
+
+		}
+		private void GetInput()
+		{
+			Console.WriteLine("Enter the number of Nodes");
+			try
+			{
+				total = int.Parse(Console.ReadLine());
+				GraphMatrix = new char[total, total];
+				nodeList = new char[total];
+
+				Console.WriteLine("Enter the Nodes");
+				for (int i = 0; i < total; i++)
+				{
+					nodeList[i] = char.Parse(Console.ReadLine());
+				}
+
+				Console.WriteLine("Enter the Graph representattion in Matrix");
+				Console.WriteLine("If there is an edge between the two vertices then enter 'y' else 'n'");
+				for (int i = 0; i < total; i++)
+				{
+					for (int j = 0; j < total; j++)
+					{
+						Console.Write("{0}----{1}==> ", nodeList[i], nodeList[j]);
+						GraphMatrix[i, j] = char.Parse(Console.ReadLine());
+					}
+					Console.WriteLine("");
+				}
+			}
+			catch
+			{
+				Console.WriteLine("Invalid number");
+			}
+		}
+
+		private int GetDegree(int i)
+		{
+			int j, deg = 0;
+			for (j = 0; j < total; j++)
+			{
+				if (GraphMatrix[i, j] == 'y') deg++;
+			}
+			return deg;
+		}
+
+		private int FindRoot()
+		{
+			int root = 1;
+			count = 0;
+			for (int i = 0; i < total; i++)
+			{
+				if (GetDegree(i) % 2 != 0)
+				{
+					count++;
+					root = i;
+				}
+			}
+			if (count != 0 && count != 2)
+			{
+				return 0;
+			}
+			else return root;
+		}
+
+		//To get the current index of node in the array nodeList[] of nodes
+		private int GetIndex(char c)
+		{
+			int index = 0;
+			while (c != nodeList[index])
+				index++;
+			return index;
+		}
+
+		//To check weather all adjecent vertices/nodes are visited or not
+		private Boolean AllVisited(int node)
+		{
+			for (int l = 0; l < total; l++)
+			{
+				if (GraphMatrix[node, l] == 'y')
+					return false;
+			}
+			return true;
+		}
+
+		//To find the Euler circuit/path and store it in finalPath arrayList
+		private void FindEuler(int root)
+		{
+			int ind;
+			tempPath.Clear();
+			tempPath.Push(nodeList[root]);
+			while (tempPath.Count != 0)
+			{
+				ind = GetIndex((char) tempPath.Peek());
+				if (AllVisited(ind))
+				{
+					finalPath.Add(tempPath.Pop());
+				}
+				else
+				{
+					for (int j = 0; j < total; j++)
+					{
+						if (GraphMatrix[ind, j] == 'y')
+						{
+							GraphMatrix[ind, j] = 'n';
+							GraphMatrix[j, ind] = 'n';
+							tempPath.Push(nodeList[j]);
+							break;
+						}
+					}
+				}
+			}
+		}
+
+		public void FindEulerCircuit()
+		{
+			GetInput();
+			int root = FindRoot();
+			if (root != 0)
+			{
+				Console.WriteLine("Available Euler circuit is");
+				FindEuler(root);
+				PrintEulerCircuit();
+			}
+			else
+			{
+				Console.WriteLine("Euler Circuit not Possible");
+			}
+		}
+
+		public void PrintEulerCircuit()
+		{
+			for (int i = 0; i < finalPath.Count; i++)
+			{
+				Console.Write("{0}--->", finalPath[i]);
+			}
+		}
+	}
+
+	class ExecuteEulerCircuit
+	{
+		public void init()
+		{
+			EulerCircuit ec = new EulerCircuit();
+			ec.FindEulerCircuit();
+
+			Console.ReadKey();
+		}
+	}
+}

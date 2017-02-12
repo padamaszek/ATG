@@ -4,3 +4,9 @@ C:\Users\Irkus\documents\visual studio 2015\Projects\ATG\ATG\bin\Debug\ATG.pdb
 C:\Users\Irkus\documents\visual studio 2015\Projects\ATG\ATG\obj\Debug\ATG.csprojResolveAssemblyReference.cache
 C:\Users\Irkus\documents\visual studio 2015\Projects\ATG\ATG\obj\Debug\ATG.exe
 C:\Users\Irkus\documents\visual studio 2015\Projects\ATG\ATG\obj\Debug\ATG.pdb
+C:\Users\Shaq\Documents\Visual Studio 2015\Projects\ATG\ATG\bin\Debug\ATG.exe.config
+C:\Users\Shaq\Documents\Visual Studio 2015\Projects\ATG\ATG\obj\Debug\ATG.exe
+C:\Users\Shaq\Documents\Visual Studio 2015\Projects\ATG\ATG\obj\Debug\ATG.pdb
+C:\Users\Shaq\Documents\Visual Studio 2015\Projects\ATG\ATG\bin\Debug\ATG.exe
+C:\Users\Shaq\Documents\Visual Studio 2015\Projects\ATG\ATG\bin\Debug\ATG.pdb
+C:\Users\Shaq\Documents\Visual Studio 2015\Projects\ATG\ATG\obj\Debug\ATG.csprojResolveAssemblyReference.cache
